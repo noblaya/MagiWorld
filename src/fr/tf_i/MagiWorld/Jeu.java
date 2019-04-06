@@ -25,8 +25,8 @@ public class Jeu {
         int playerNb = 1;
 
         do {
-            System.out.println("Création du personnage du joueur " + playerNb + "%n");
-            System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage" + "%n");
+            System.out.println("Création du personnage du Joueur " + playerNb);
+            System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage");
 
         } while (playerNb <= nbPlayers);
         isGameSetup = true;
