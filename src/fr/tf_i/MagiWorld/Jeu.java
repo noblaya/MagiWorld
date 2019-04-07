@@ -1,34 +1,37 @@
 package fr.tf_i.MagiWorld;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import fr.tf_i.MagiWorld.Player.Player;
 
 public class Jeu {
-    boolean isGameSetup = false;
-
-    public Jeu(boolean isGameSetup) {
-        this.isGameSetup = isGameSetup;
-    }
+    private boolean isGameSetup = false;
+    private int nbPlayers = 2;
+    protected int playerNb = 0;
 
 
-    public void gameLaunch (){
-        do {
+    public void gameLaunch () {
+
+        if (isGameSetup == false) {
             setupGame();
-        } while (isGameSetup = false);
+        } else {
+            System.out.println("---------- Succès ! ----------");
+        }
 
         //SUITE
     }
 
     public void setupGame() {
-        Path gameSetupPath = Paths.get("GameSetup.csv");
-        int nbPlayers = 2;
-        int playerNb = 1;
+        Player player = new Player();
 
-        do {
+        playerNb ++;
+
+        if (playerNb < nbPlayers) {
             System.out.println("Création du personnage du Joueur " + playerNb);
-            System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage");
-
-        } while (playerNb <= nbPlayers);
-        isGameSetup = true;
+            player.askChosenClasse();
+        } else {
+            isGameSetup = true;
+            gameLaunch();
+        }
     }
+
+
 }

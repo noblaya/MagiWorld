@@ -1,88 +1,71 @@
 package fr.tf_i.MagiWorld.Player;
 
-import java.util.InputMismatchException;
+import fr.tf_i.MagiWorld.Jeu;
+
 import java.util.Scanner;
 
 public class Player {
     Scanner sc = new Scanner(System.in);
-    int classe, level, life, strength, agility, intelligence = 0;
-    String className = "";
-
-    public Player(int classe, int level, int life, int strength, int agility, int intelligence) {
-        this.classe = classe;
-        this.level = level;
-        this.life = life;
-        this.strength = strength;
-        this.agility = agility;
-        this.intelligence = intelligence;
-    }
+    private int classe, level, life, strength, agility, intelligence, playerNb = 0;
+    Jeu jeu = new Jeu();
 
     /**
      * Ask the chosen class to the player between 1 and 3 (1 : Guerrier 2 : Rôdeur, 3 : Mage)
-     * @param classe the chosen class
      */
-    public void askChosenClasse(int classe) {
-        boolean responseIsGood;
-        this.classe = classe;
+    public void askChosenClasse() {
+        playerNb ++;
+        System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2: Rôdeur, 3: Mage");
+        classe = 1;
+        askLevel();
+    }
 
-        System.out.println("Veuillez choisir la classe de votre personnage");
-        do {
-            try {
-                    classe = sc.nextInt();
-                    responseIsGood = (classe >=1 && classe <=3);
+    public void askLevel() {
+        System.out.println("Niveau du personnage ? (Entre 1 et 100)");
+        level = 10;
+        askStrength();
+    }
 
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("Vous devez choisir la classe de votre personnage entre les 3 choix (Exemple : saisissez ''1'' pour ''Guerrier'')");
-                responseIsGood =  false;
-            }
-        } while (!responseIsGood);
 
-        this.className = className;
-        switch (classe) {
+    public void askStrength(){
+        System.out.println("Force du personnage ? (Entre 0 et 10)");
+        strength = 10;
+        askAgility();
+    }
+
+    public void askAgility() {
+        System.out.println("Agilité du personnage ? (Entre 0 et 10)");
+        agility = 0;
+        askIntelligence();
+    }
+
+    public void askIntelligence() {
+        System.out.println("Intelligence du personnage ? (Entre 0 et 10");
+        intelligence = 0;
+        setLife();
+    }
+
+    public void setLife() {
+        life = level*5;
+        setPlayerDescription();
+    }
+
+    public void setPlayerDescription() {
+        String intro = "";
+        switch (classe){
             case 1 :
-                className = "Guerrier";
+                intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau "+ level + " je possède " + life + " de vie, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
                 break;
             case 2 :
-                className = "Rôdeur";
+                intro = "Hmm je suis le Rôdeur Joueur " + playerNb + " niveau "+ level + " je possède " + life + " de vie, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
                 break;
             case 3 :
-                className = "Mage";
+                intro = "Abracadabra je suis le Mage Joueur " + playerNb + " niveau "+ level + " je possède " + life + " de vie, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+            default:
+                intro = "Erreur dans le choix du personnage, je suis donc un simple humain Joueur " + playerNb + " niveau "+ level + " je possède " + life + " de vie, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
                 break;
-
-                default:
-                    className = "Aucune";
-                    break;
-
         }
-
-        if (className.contains("Aucune")){
-            System.out.println("Erreur lors de la saisie de la classe !");
-        } else
-            System.out.println("Vous êtes un " + className);
-        this.askLevel(0);
-    }
-
-    public void askLevel(int level) {
-        this.level = level;
-        //SUITE
-    }
-
-
-    public void askStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public void askAgility(int agility) {
-        this.agility = agility;
-    }
-
-    public void askIntelligence(int intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public void setLife(int life) {
-        this.life = life;
+        System.out.println(intro);
+        jeu.setupGame();
     }
 
 }
