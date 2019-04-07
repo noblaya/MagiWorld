@@ -2,12 +2,13 @@ package fr.tf_i.MagiWorld.Player;
 
 import fr.tf_i.MagiWorld.Jeu;
 
-import java.util.Scanner;
-
+/**
+ * Maybe use a board with Player id (ex id 0 = Player 1, id 1 = Player 2) with all there stats (level, life, etc) and
+ * print a csv file or other.
+ */
 public class Player {
-    Scanner sc = new Scanner(System.in);
     private int classe, level, life, strength, agility, intelligence, playerNb = 0;
-    Jeu jeu = new Jeu();
+    private Jeu jeu = new Jeu();
 
     /**
      * Ask the chosen class to the player between 1 and 3 (1 : Guerrier 2 : Rôdeur, 3 : Mage)
@@ -19,38 +20,56 @@ public class Player {
         askLevel();
     }
 
-    public void askLevel() {
+    /**
+     * Ask player level between 1 and 100
+     */
+    private void askLevel() {
         System.out.println("Niveau du personnage ? (Entre 1 et 100)");
         level = 10;
         askStrength();
     }
 
 
-    public void askStrength(){
+    /**
+     * Ask player Strength between 1 and 10
+     */
+    private void askStrength(){
         System.out.println("Force du personnage ? (Entre 0 et 10)");
         strength = 10;
         askAgility();
     }
 
-    public void askAgility() {
+    /**
+     * Ask player Agility between 1 and 10
+     */
+    private void askAgility() {
         System.out.println("Agilité du personnage ? (Entre 0 et 10)");
         agility = 0;
         askIntelligence();
     }
 
-    public void askIntelligence() {
+    /**
+     * Ask player Intelligence between 1 and 10
+     */
+    private void askIntelligence() {
         System.out.println("Intelligence du personnage ? (Entre 0 et 10");
         intelligence = 0;
         setLife();
     }
 
-    public void setLife() {
+    /**
+     * Set the player life (Player Level x 5)
+     */
+    private void setLife() {
         life = level*5;
         setPlayerDescription();
     }
 
-    public void setPlayerDescription() {
-        String intro = "";
+    /**
+     * Set the player description (or intro) using player id
+     */
+    private void setPlayerDescription() {
+        String intro;
         switch (classe){
             case 1 :
                 intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau "+ level + " je possède " + life + " de vie, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
