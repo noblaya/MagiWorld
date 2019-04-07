@@ -2,6 +2,8 @@ package fr.tf_i.MagiWorld.Player;
 
 import fr.tf_i.MagiWorld.Jeu;
 
+import java.util.Scanner;
+
 /**
  * Maybe use a board with Player id (ex id 0 = Player 1, id 1 = Player 2) with all there stats (level, life, etc) and
  * print a csv file or other.
@@ -9,14 +11,15 @@ import fr.tf_i.MagiWorld.Jeu;
 public class Player {
     private int classe, level, life, strength, agility, intelligence, playerNb = 0;
     private Jeu jeu = new Jeu();
+    Scanner sc = new Scanner(System.in);
 
     /**
      * Ask the chosen class to the player between 1 and 3 (1 : Guerrier 2 : Rôdeur, 3 : Mage)
      */
     public void askChosenClasse() {
         playerNb ++;
-        System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2: Rôdeur, 3: Mage");
-        classe = 1;
+        System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2: Rôdeur, 3: Mage)");
+        classe = sc.nextInt();
         askLevel();
     }
 
@@ -25,7 +28,7 @@ public class Player {
      */
     private void askLevel() {
         System.out.println("Niveau du personnage ? (Entre 1 et 100)");
-        level = 10;
+        level = sc.nextInt();
         askStrength();
     }
 
@@ -35,7 +38,7 @@ public class Player {
      */
     private void askStrength(){
         System.out.println("Force du personnage ? (Entre 0 et 10)");
-        strength = 10;
+        strength = sc.nextInt();
         askAgility();
     }
 
@@ -44,7 +47,7 @@ public class Player {
      */
     private void askAgility() {
         System.out.println("Agilité du personnage ? (Entre 0 et 10)");
-        agility = 0;
+        agility = sc.nextInt();
         askIntelligence();
     }
 
@@ -53,7 +56,7 @@ public class Player {
      */
     private void askIntelligence() {
         System.out.println("Intelligence du personnage ? (Entre 0 et 10");
-        intelligence = 0;
+        intelligence = sc.nextInt();
         setLife();
     }
 

@@ -8,6 +8,7 @@ public class Jeu {
     private int nbPlayers = 2; // Number of Players
 
 
+
     /**
      * Launch the game, it is the core
      */
@@ -26,7 +27,7 @@ public class Jeu {
      * Setup the game and players.
      */
     public void setupGame() {
-        Player player = new Player();
+       Player player = new Player();
 
         if (playerNb < nbPlayers) { //IF player number (ex : Player 1) is less than the number of players (2 here) so set it up
             playerNb ++;
