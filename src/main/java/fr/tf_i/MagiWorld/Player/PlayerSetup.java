@@ -13,6 +13,10 @@ import static java.nio.file.StandardOpenOption.APPEND;
 public class PlayerSetup {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Setup player dispatch (between player 1 and 2)
+     * @param playerNb Which player to setup
+     */
     public void setupPlayers(int playerNb){
         if (playerNb == 1) {
             setPlayer1();
@@ -23,7 +27,9 @@ public class PlayerSetup {
         }
     }
 
-
+    /**
+     * Setup Player 1
+     */
     public void setPlayer1() {
         Player players = new Player();
         Path playerSetupPath = Paths.get("PlayerSetup.csv");
@@ -33,22 +39,40 @@ public class PlayerSetup {
 
         System.out.println("Création du personnage du Joueur 1");
 
-        System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
-        classe = sc.nextInt();
 
-        System.out.println("Niveau du personnage ? (Entre 1 et 100)");
-        lvl = sc.nextInt();
+        //Set Player's Class :
+        do {
+            System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
+            classe = sc.nextInt();
+        } while (classe < 1 || classe > 3);
 
+
+        //Set Player's Level :
+        do {
+            System.out.println("Niveau du personnage ? (Entre 1 et 100)");
+            lvl = sc.nextInt();
+        } while (lvl < 1 || lvl > 100);
+
+        //Set Player's life
         life = lvl*5;
 
-        System.out.println("Force du personnage ? (Entre 0 et 10)");
-        strength = sc.nextInt();
+        //Set Player's Strength
+        do {
+            System.out.println("Force du personnage ? (Entre 0 et 10)");
+            strength = sc.nextInt();
+        } while (strength < 0 || strength > 10);
 
-        System.out.println("Agilité du personnage ? (Entre 0 et 10)");
-        agility = sc.nextInt();
+        //Set Player's Agility
+        do {
+            System.out.println("Agilité du personnage ? (Entre 0 et 10)");
+            agility = sc.nextInt();
+        } while (agility < 0 || agility > 10);
 
-        System.out.println("Intelligence du personnage ? (Entre 0 et 10)");
-        intelligence = sc.nextInt();
+        //Set Player's Intelligence
+        do {
+            System.out.println("Intelligence du personnage ? (Entre 0 et 10)");
+            intelligence = sc.nextInt();
+        } while (intelligence < 0 || intelligence > 10);
 
         playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
         try {
@@ -61,6 +85,9 @@ public class PlayerSetup {
         setupIntro(1,classe,lvl,life,strength,agility,intelligence);
     }
 
+    /**
+     * Setup Player 2
+     */
     private void setPlayer2() {
         Jeu jeu = new Jeu();
         Player players = new Player();
@@ -71,22 +98,39 @@ public class PlayerSetup {
 
         System.out.println("Création du personnage du Joueur 2");
 
-        System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
-        classe = sc.nextInt();
+        //Set Player's Class :
+        do {
+            System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
+            classe = sc.nextInt();
+        } while (classe < 1 || classe > 3);
 
-        System.out.println("Niveau du personnage ? (Entre 1 et 100)");
-        lvl = sc.nextInt();
 
+        //Set Player's Level :
+        do {
+            System.out.println("Niveau du personnage ? (Entre 1 et 100)");
+            lvl = sc.nextInt();
+        } while (lvl < 1 || lvl > 100);
+
+        //Set Player's life
         life = lvl*5;
 
-        System.out.println("Force du personnage ? (Entre 0 et 10)");
-        strength = sc.nextInt();
+        //Set Player's Strength
+        do {
+            System.out.println("Force du personnage ? (Entre 0 et 10)");
+            strength = sc.nextInt();
+        } while (strength < 0 || strength > 10);
 
-        System.out.println("Agilité du personnage ? (Entre 0 et 10)");
-        agility = sc.nextInt();
+        //Set Player's Agility
+        do {
+            System.out.println("Agilité du personnage ? (Entre 0 et 10)");
+            agility = sc.nextInt();
+        } while (agility < 0 || agility > 10);
 
-        System.out.println("Intelligence du personnage ? (Entre 0 et 10)");
-        intelligence = sc.nextInt();
+        //Set Player's Intelligence
+        do {
+            System.out.println("Intelligence du personnage ? (Entre 0 et 10)");
+            intelligence = sc.nextInt();
+        } while (intelligence < 0 || intelligence > 10);
 
         playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
         try {
@@ -99,6 +143,16 @@ public class PlayerSetup {
         setupIntro(2,classe,lvl,life,strength,agility,intelligence);
     }
 
+    /**
+     * Setup the player intro String and print it.
+     * @param playerNb which player (1 or 2)
+     * @param classe player's class
+     * @param lvl player's level
+     * @param life player's life
+     * @param strength player's strength
+     * @param agility player's agility
+     * @param intelligence player's intelligence
+     */
     private void setupIntro(int playerNb, int classe, int lvl, int life, int strength, int agility, int intelligence) {
         Jeu jeu = new Jeu();
         String intro;
