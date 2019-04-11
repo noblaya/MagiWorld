@@ -1,41 +1,204 @@
 package fr.tf_i.MagiWorld.Player;
 
+import fr.tf_i.MagiWorld.Classes.Guerrier;
+import fr.tf_i.MagiWorld.Classes.Mage;
+import fr.tf_i.MagiWorld.Classes.Rodeur;
 import fr.tf_i.MagiWorld.Jeu;
 
 import java.util.Scanner;
 
-/**
- * Maybe use a board with Player id (ex id 0 = Player 1, id 1 = Player 2) with all there stats (level, life, etc) and
- * print a csv file or other.
- */
 public class Player {
+    Scanner sc = new Scanner(System.in);
+    int currentAction = -1;
 
     /**
      * Player 1
-     * @param classe Class of the player (1 : Warrior, 2 : Stealth, 3 : Wizard)
-     * @param lvl Level of the player (between 1 - 100)
-     * @param life life of the player (= Level x5)
-     * @param strength Strength of the player (between 1 - 10)
-     * @param agility Agility of the player (between 1 - 10)
-     * @param intelligence Intelligence of the player (between 1 - 10)
      */
-    public void Player1 (int classe, int lvl, int life, int strength, int agility, int intelligence){
+    public void Player1 (){
+        int classe = -1;
+        int lvl = -1;
+        int life = -1;
+        int strength = -1;
+        int agility = -1;
+        int intelligence = -1;
+        int currentLife = -1;
+        int playerNb = 1;
+        boolean isPlayerInit = false;
+
+
+        if (isPlayerInit == true) {
+            do {
+                do {
+                    System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                    currentAction = sc.nextInt();
+                    PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+
+                } while (currentAction < 1 || currentAction > 2);
+                currentAction = -1;
+            } while (currentLife <= 0);
+            System.out.println("Joueur 1, vous avez perdu !");
+            // ---------------- FIN DU JEU ---------------
+        } else {
+            // ---------------- INIT VARIABLES USING CSV HERE -----------------
+            currentLife = life;
+            isPlayerInit = true;
+            Player1();
+        }
 
     }
 
     /**
      * Player 2
-     * @param classe Class of the player (1 : Warrior, 2 : Stealth, 3 : Wizard)
-     * @param lvl Level of the player (between 1 - 100)
-     * @param life life of the player (= Level x5)
-     * @param strength Strength of the player (between 1 - 10)
-     * @param agility Agility of the player (between 1 - 10)
-     * @param intelligence Intelligence of the player (between 1 - 10)
      */
-    public void Player2 (int classe, int lvl, int life, int strength, int agility, int intelligence){
+    public void Player2 (){
+        int classe = -1;
+        int lvl = -1;
+        int life = -1;
+        int strength = -1;
+        int agility = -1;
+        int intelligence = -1;
+        int currentLife = -1;
+        int playerNb = 1;
+        boolean isPlayerInit = false;
+
+
+        if (isPlayerInit == true) {
+            do {
+                do {
+                    System.out.println("Joueur 2 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                    currentAction = sc.nextInt();
+                    PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+
+                } while (currentAction < 1 || currentAction > 2);
+                currentAction = -1;
+            } while (currentLife <= 0);
+            System.out.println("Joueur 2, vous avez perdu !");
+            // ---------------- FIN DU JEU ---------------
+        } else {
+            // ---------------- INIT VARIABLES USING CSV HERE --------------
+            currentLife = life;
+            isPlayerInit = true;
+            Player2();
+        }
 
     }
 
+    /**
+     * Players Actions
+     * @param attPlayerNb Which player is performing the action ?
+     * @param attClasse Class of this player
+     * @param attLvl Level of this player
+     * @param attLife Max life of this player
+     * @param attStrength Strength of this player
+     * @param attAgility Agility of this player
+     * @param attIntelligence Intelligence of this player
+     * @param attCurrentAction Which action player choose
+     * @param attCurrentLife The current life of this player
+     */
+    public void PlayerAttack (int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
+
+        int[] actionResult;
+        int damage = -1;
+        int self = -1;
+
+        if (attPlayerNb == 1) {
+
+            // PLAYER 1 ACTIONS
+            switch (currentAction) {
+                case 1: {
+                    switch (attClasse) {
+                        case 1:
+                            damage = Guerrier.BasicAttack(attPlayerNb, attStrength);
+                            break;
+
+                        case 2:
+                            damage = Rodeur.BasicAttack(attPlayerNb, attAgility);
+                            break;
+
+                        case 3:
+                            damage = Mage.BasicAttack(attPlayerNb, attIntelligence);
+                            break;
+
+                        default:
+                            System.out.println("Erreur lors du choix des joueurs");
+                            break;
+                    }
+                }
+
+                case 2: {
+                    switch (attClasse) {
+                        case 1:
+                            actionResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            break;
+
+                        case 2:
+                            self = Rodeur.SpecialAttack(attPlayerNb, attLvl);
+                            break;
+
+                        case 3:
+                            self = Mage.SpecialAttack(attPlayerNb, attIntelligence, attLife, attCurrentLife);
+                            break;
+
+                        default:
+                            System.out.println("Erreur lors du choix des joueurs");
+                            break;
+                    }
+
+                }
+            }
+            Player2();
+
+
+            // PLAYER 2 ACTIONS
+        } else {
+            switch (currentAction) {
+                case 1: {
+                    switch (attClasse) {
+                        case 1:
+                            damage = Guerrier.BasicAttack(attPlayerNb, attStrength);
+                            if (attPlayerNb == 1) {
+
+                            }
+                            break;
+
+                        case 2:
+                            damage = Rodeur.BasicAttack(attPlayerNb, attAgility);
+                            break;
+
+                        case 3:
+                            damage = Mage.BasicAttack(attPlayerNb, attIntelligence);
+                            break;
+
+                        default:
+                            System.out.println("Erreur lors du choix des joueurs");
+                            break;
+                    }
+                }
+
+                case 2: {
+                    switch (attClasse) {
+                        case 1:
+                            actionResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            break;
+
+                        case 2:
+                            self = Rodeur.SpecialAttack(attPlayerNb, attLvl);
+                            break;
+
+                        case 3:
+                            self = Mage.SpecialAttack(attPlayerNb, attIntelligence, attLife, attCurrentLife);
+                            break;
+
+                        default:
+                            System.out.println("Erreur lors du choix des joueurs");
+                            break;
+                    }
+
+                }
+            }
+            Player1();
+        }
+    }
 }
 
 

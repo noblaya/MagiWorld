@@ -79,6 +79,9 @@ public class PlayerSetup {
             } while (!responseIsGood);
         } while (lvl < 1 || lvl > 100);
 
+        //Set Available Points to Spend.
+        availablePoints = lvl;
+
 
         //Set Player's life
         life = lvl*5;
@@ -87,48 +90,51 @@ public class PlayerSetup {
         //Set Player's Strength
         do {
             do {
-                System.out.println("Force du personnage ? (Entre 0 et 100)");
+                System.out.println("Force du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     strength = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à la Force du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitée");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
-        } while (strength < 0 || strength > 10);
+        } while (strength < 0 || strength > availablePoints);
+        availablePoints = (availablePoints - strength);
 
 
         //Set Player's Agility
         do {
             do {
-                System.out.println("Agilité du personnage ? (Entre 0 et 100)");
+                System.out.println("Agilité du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     agility = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à l'Agilité du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitée");
                     responseIsGood = false;
                 }
             }while (!responseIsGood);
-        } while (agility < 0 || agility > 10);
+        } while (agility < 0 || agility > availablePoints);
+        availablePoints = (availablePoints - agility);
 
         //Set Player's Intelligence
         do {
             do {
-                System.out.println("Intelligence du personnage ? (Entre 0 et 100)");
+                System.out.println("Intelligence du personnage ? (Entre 0 et " + availablePoints +")");
                 try {
                     intelligence = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e){
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à l'Intelligence du personnage souahaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitée");
                     responseIsGood = false;
                 }
 
             } while (!responseIsGood);
         } while (intelligence < 0 || intelligence > 100);
+        availablePoints = (availablePoints - intelligence);
 
         playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
         try {
@@ -192,6 +198,9 @@ public class PlayerSetup {
             } while (!responseIsGood);
         } while (lvl < 1 || lvl > 100);
 
+        //Set Available Points to Spend.
+        availablePoints = lvl;
+
 
         //Set Player's life
         life = lvl*5;
@@ -200,48 +209,52 @@ public class PlayerSetup {
         //Set Player's Strength
         do {
             do {
-                System.out.println("Force du personnage ? (Entre 0 et 100)");
+                System.out.println("Force du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     strength = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à la Force du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitée");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
-        } while (strength < 0 || strength > 100);
+        } while (strength < 0 || strength > availablePoints);
+        availablePoints = (availablePoints - strength);
 
 
         //Set Player's Agility
         do {
             do {
-                System.out.println("Agilité du personnage ? (Entre 0 et 100)");
+                System.out.println("Agilité du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     agility = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à l'Agilité du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitée");
                     responseIsGood = false;
                 }
             }while (!responseIsGood);
-        } while (agility < 0 || agility > 100);
+        } while (agility < 0 || agility > availablePoints);
+        availablePoints = (availablePoints - agility);
 
         //Set Player's Intelligence
         do {
             do {
-                System.out.println("Intelligence du personnage ? (Entre 0 et 100)");
+                System.out.println("Intelligence du personnage ? (Entre 0 et " + availablePoints +")");
                 try {
                     intelligence = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e){
-                    System.out.println("Merci de saisir un nombre entre 0 et 100 correspondant à l'Intelligence du personnage souahaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitée");
                     responseIsGood = false;
                 }
 
             } while (!responseIsGood);
         } while (intelligence < 0 || intelligence > 100);
+        availablePoints = (availablePoints - intelligence);
+
         playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
