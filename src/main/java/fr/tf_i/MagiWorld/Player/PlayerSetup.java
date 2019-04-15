@@ -39,14 +39,17 @@ public class PlayerSetup {
         int classe = -1;
         int lvl = -1;
         int life = -1;
-        int currentLife = -1;
         int strength = -1;
         int agility = -1;
         int intelligence = -1;
         int playerNb = 1;
         int availablePoints = -1;
+        int currentLife = -1;
 
+        System.out.println("");
+        System.out.println("----------------------------------");
         System.out.println("Création du personnage du Joueur 1");
+        System.out.println("----------------------------------");
 
 
         //Set Player's Class :
@@ -142,7 +145,7 @@ public class PlayerSetup {
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la génération du PlayerSetup.csv. Merci de rééssayer.");
+            System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
             return;
         }
 
@@ -166,8 +169,12 @@ public class PlayerSetup {
         int intelligence = -1;
         int playerNb = 2;
         int availablePoints = -1;
+        int currentLife = -1;
 
+        System.out.println("");
+        System.out.println("----------------------------------");
         System.out.println("Création du personnage du Joueur 2");
+        System.out.println("----------------------------------");
 
         //Set Player's Class :
         do {
@@ -206,6 +213,7 @@ public class PlayerSetup {
 
         //Set Player's life
         life = lvl*5;
+        currentLife = life;
 
 
         //Set Player's Strength
@@ -257,11 +265,11 @@ public class PlayerSetup {
         } while (intelligence < 0 || intelligence > 100);
         availablePoints = (availablePoints - intelligence);
 
-        playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
+        playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "," + currentLife + "%n";
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la génération du PlayerSetup.csv. MErci de rééssayer.");
+            System.out.println("Une erreur est survenue lors de la génération du Player2.csv. MErci de rééssayer.");
             return;
         }
 

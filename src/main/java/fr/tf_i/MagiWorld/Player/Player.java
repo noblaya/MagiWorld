@@ -5,14 +5,21 @@ import fr.tf_i.MagiWorld.Classes.Mage;
 import fr.tf_i.MagiWorld.Classes.Rodeur;
 import fr.tf_i.MagiWorld.Data.ReadLastLine;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.nio.file.StandardOpenOption.APPEND;
+
 public class Player {
     Scanner sc = new Scanner(System.in);
+    PrintWriter writer;
     int currentAction = -1;
 
 
@@ -57,6 +64,8 @@ public class Player {
         do {
             do {
                 do {
+                    System.out.println("");
+                    System.out.println("------------------------------------------------------------------------------------------------------------------");
                     System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
                     try {
                         currentAction = sc.nextInt();
@@ -76,7 +85,26 @@ public class Player {
             } while (currentAction < 1 || currentAction > 2);
             currentAction = -1;
         } while (currentLife <= 0);
+
+        // ---------------- FIN DU JEU ---------------
+
         System.out.println("Joueur 1, vous avez perdu !");
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("Player1.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+        try {
+            PrintWriter writer2 = new PrintWriter("Player2.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+
         // ---------------- FIN DU JEU ---------------
 
     }
@@ -121,7 +149,9 @@ public class Player {
         do {
             do {
                 do {
-                    System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                    System.out.println("");
+                    System.out.println("------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("Joueur 2 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
                     try {
                         currentAction = sc.nextInt();
                         responseIsGood = true;
@@ -140,8 +170,28 @@ public class Player {
             } while (currentAction < 1 || currentAction > 2);
             currentAction = -1;
         } while (currentLife <= 0);
+
+        // ---------------- END OF THE GAME ---------------
+
         System.out.println("Joueur 2, vous avez perdu !");
-        // ---------------- FIN DU JEU ---------------
+
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("Player1.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+        try {
+            PrintWriter writer2 = new PrintWriter("Player2.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+
+        // ---------------- END OF THE GAME ---------------
 
     }
 
@@ -159,11 +209,76 @@ public class Player {
      */
     public static void PlayerAttack(int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
 
-        int[] actionResult;
+        Path player1CSVPath = Paths.get("Player1.csv");
+        Path player2CSVPath = Paths.get("Player2CSV");
+        String ennemySetup;
+        String playerSetup;
+
+        String player1Stats = "";
+        String player2Stats = "";
+        String[] splitPl1;
+        String[] splitPl2;
+
+        int[] multipleResult;
         int damage = -1;
         int self = -1;
 
+        int plPlayerNb = -1;
+        int plClasse = -1;
+        int plLvl = -1;
+        int plLife= -1;
+        int plStrength = -1;
+        int plAgility =-1;
+        int plIntelligence = -1;
+        int plCurrentLife = -1;
+
+        int ennPlayerNb = -1;
+        int ennClasse = -1;
+        int ennLvl = -1;
+        int ennLife= -1;
+        int ennStrength = -1;
+        int ennAgility =-1;
+        int ennIntelligence = -1;
+        int ennCurrentLife = -1;
+
+
         if (attPlayerNb == 1) {
+
+            //Load Player 1 Setup :
+            try {
+                player1Stats = ReadLastLine.Player1CSV();
+            } catch (Exception e) {
+                System.out.println("Erreur lors de la lecture du Player1.csv");
+            }
+            plPlayerNb = 1;
+            plClasse = attClasse;
+            plLvl = attLvl;
+            plLife = attLife;
+            plStrength = attStrength;
+            plAgility = attAgility;
+            plIntelligence = attIntelligence;
+            plCurrentLife = attCurrentLife;
+
+
+            splitPl1 = player1Stats.split(",");
+
+            //Load Player 2 Setup :
+            try {
+                player2Stats = ReadLastLine.Player2CSV();
+            } catch (Exception e) {
+                System.out.println("Erreur lors de la lecture du Player2.csv");
+            }
+
+            splitPl2 = player2Stats.split(",");
+
+            ennPlayerNb = 2;
+            ennClasse = Integer.valueOf(splitPl2[1]);
+            ennLvl = Integer.valueOf(splitPl2[2]);
+            ennLife = Integer.valueOf(splitPl2[3]);
+            ennStrength = Integer.valueOf(splitPl2[4]);
+            ennAgility = Integer.valueOf(splitPl2[5]);
+            ennIntelligence = Integer.valueOf(splitPl2[6]);
+            ennCurrentLife = Integer.valueOf(splitPl2[7]);
 
             // PLAYER 1 ACTIONS
             switch (attCurrentAction) {
@@ -171,14 +286,44 @@ public class Player {
                     switch (attClasse) {
                         case 1:
                             damage = Guerrier.BasicAttack(attPlayerNb, attStrength);
+                            ennCurrentLife = ennCurrentLife - damage;
+
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 2:
                             damage = Rodeur.BasicAttack(attPlayerNb, attAgility);
+                            ennCurrentLife = ennCurrentLife - damage;
+
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 3:
                             damage = Mage.BasicAttack(attPlayerNb, attIntelligence);
+                            ennCurrentLife = ennCurrentLife - damage;
+
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         default:
@@ -190,15 +335,62 @@ public class Player {
                 case 2: {
                     switch (attClasse) {
                         case 1:
-                            actionResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            multipleResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            damage = multipleResult[0];
+                            self = multipleResult[1];
+
+                            ennCurrentLife = ennCurrentLife - damage;
+                            plCurrentLife = plCurrentLife - self;
+
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
+
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
+                                return;
+                            }
+
                             break;
 
                         case 2:
                             self = Rodeur.SpecialAttack(attPlayerNb, attLvl);
+                            plAgility = plAgility + self;
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 3:
                             self = Mage.SpecialAttack(attPlayerNb, attIntelligence, attLife, attCurrentLife);
+                            plCurrentLife = plCurrentLife + self;
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         default:
@@ -213,23 +405,88 @@ public class Player {
 
             // PLAYER 2 ACTIONS
         } else {
+
+            //Load Player 1 Setup :
+            try {
+                player1Stats = ReadLastLine.Player1CSV();
+            } catch (Exception e) {
+                System.out.println("Erreur lors de la lecture du Player1.csv");
+            }
+            plPlayerNb = 2;
+            plClasse = attClasse;
+            plLvl = attLvl;
+            plLife = attLife;
+            plStrength = attStrength;
+            plAgility = attAgility;
+            plIntelligence = attIntelligence;
+            plCurrentLife = attCurrentLife;
+
+
+            splitPl1 = player1Stats.split(",");
+
+            //Load Player 2 Setup :
+            try {
+                player2Stats = ReadLastLine.Player2CSV();
+            } catch (Exception e) {
+                System.out.println("Erreur lors de la lecture du Player2.csv");
+            }
+
+            splitPl2 = player2Stats.split(",");
+
+            ennPlayerNb = 2;
+            ennClasse = Integer.valueOf(splitPl1[1]);
+            ennLvl = Integer.valueOf(splitPl1[2]);
+            ennLife = Integer.valueOf(splitPl1[3]);
+            ennStrength = Integer.valueOf(splitPl1[4]);
+            ennAgility = Integer.valueOf(splitPl1[5]);
+            ennIntelligence = Integer.valueOf(splitPl1[6]);
+            ennCurrentLife = Integer.valueOf(splitPl1[7]);
+
+            // PLAYER 2 ACTIONS
             switch (attCurrentAction) {
                 case 1: {
                     switch (attClasse) {
                         case 1:
                             damage = Guerrier.BasicAttack(attPlayerNb, attStrength);
-                            if (attPlayerNb == 1) {
+                            ennCurrentLife = ennCurrentLife - damage;
 
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
                             }
                             break;
 
                         case 2:
                             damage = Rodeur.BasicAttack(attPlayerNb, attAgility);
+                            ennCurrentLife = ennCurrentLife - damage;
+
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 3:
                             damage = Mage.BasicAttack(attPlayerNb, attIntelligence);
-                            break;
+                            ennCurrentLife = ennCurrentLife - damage;
+
+                            //Update CSV
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                            Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                        } catch (IOException e) {
+                            System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                            return;
+                        }
+                        break;
 
                         default:
                             System.out.println("Erreur lors du choix des joueurs");
@@ -240,15 +497,61 @@ public class Player {
                 case 2: {
                     switch (attClasse) {
                         case 1:
-                            actionResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            multipleResult = Guerrier.SpecialAttack(attPlayerNb, attStrength);
+                            damage = multipleResult[0];
+                            self = multipleResult[1];
+
+                            ennCurrentLife = ennCurrentLife - damage;
+                            plCurrentLife = plCurrentLife - self;
+
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
+
+                            ennemySetup = ennPlayerNb + "," + ennClasse + "," + ennLvl + "," + ennLife +  "," + ennStrength + "," + ennAgility + "," + ennIntelligence + "," + ennCurrentLife + "%n";
+                            try {
+                                Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 2:
                             self = Rodeur.SpecialAttack(attPlayerNb, attLvl);
+                            plAgility = plAgility + self;
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         case 3:
                             self = Mage.SpecialAttack(attPlayerNb, attIntelligence, attLife, attCurrentLife);
+                            plCurrentLife = plCurrentLife + self;
+
+                            //Update CSVs
+
+                            playerSetup = plPlayerNb + "," + plClasse + "," + plLvl + "," + plLife +  "," + plStrength + "," + plAgility + "," + plIntelligence + "," + plCurrentLife + "%n";
+                            try {
+                                Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
+                            } catch (IOException e) {
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+                                return;
+                            }
                             break;
 
                         default:
