@@ -7,6 +7,7 @@ import fr.tf_i.MagiWorld.Data.ReadLastLine;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,13 +16,14 @@ public class Player {
     int currentAction = -1;
 
 
-    
+
     /**
      * Player 1
      */
     public static void Player1(){
         Scanner sc = new Scanner(System.in);
         String csv = "";
+        boolean responseIsGood;
         int currentAction = -1;
 
         int classe = -1;
@@ -54,10 +56,21 @@ public class Player {
 
         do {
             do {
+                do {
+                    System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                    try {
+                        currentAction = sc.nextInt();
+                        responseIsGood = true;
+                    } catch (InputMismatchException e) {
+                        sc.next();
+                        System.out.println("Merci de tapper 1 pour Attaque Basique ou 2 pour Attaque Spéciale");
+                        responseIsGood = false;
+                    }
+
+                } while (!responseIsGood);
+
                 //SUITE
-                System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
-                currentAction = sc.nextInt();
-                PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+                PlayerAttack(playerNb, classe, lvl, life, strength, agility, intelligence, currentAction, currentLife);
                 //SUITE
 
             } while (currentAction < 1 || currentAction > 2);
@@ -75,6 +88,7 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         String csv = "";
         int currentAction = -1;
+        boolean responseIsGood;
 
         int classe = -1;
         int lvl = -1;
@@ -106,10 +120,21 @@ public class Player {
 
         do {
             do {
+                do {
+                    System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                    try {
+                        currentAction = sc.nextInt();
+                        responseIsGood = true;
+                    } catch (InputMismatchException e) {
+                        sc.next();
+                        System.out.println("Merci de tapper 1 pour Attaque Basique ou 2 pour Attaque Spéciale");
+                        responseIsGood = false;
+                    }
+
+                } while (!responseIsGood);
+
                 //SUITE
-                System.out.println("Joueur 2 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
-                currentAction = sc.nextInt();
-                PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+                PlayerAttack(playerNb, classe, lvl, life, strength, agility, intelligence, currentAction, currentLife);
                 //SUITE
 
             } while (currentAction < 1 || currentAction > 2);
