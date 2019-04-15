@@ -33,12 +33,13 @@ public class PlayerSetup {
      */
     public void setPlayer1() {
         Player players = new Player();
-        Path playerSetupPath = Paths.get("PlayerSetup.csv");
+        Path playerSetupPath = Paths.get("Player1.csv");
         String playerSetup = "";
         boolean responseIsGood;
         int classe = -1;
         int lvl = -1;
         int life = -1;
+        int currentLife = -1;
         int strength = -1;
         int agility = -1;
         int intelligence = -1;
@@ -85,6 +86,7 @@ public class PlayerSetup {
 
         //Set Player's life
         life = lvl*5;
+        currentLife = life;
 
 
         //Set Player's Strength
@@ -136,7 +138,7 @@ public class PlayerSetup {
         } while (intelligence < 0 || intelligence > 100);
         availablePoints = (availablePoints - intelligence);
 
-        playerSetup = playerNb + "," + classe + "," + lvl + "," + life + "," + strength + "," + agility + "," + intelligence + "%n";
+        playerSetup = playerNb + "," + classe + "," + lvl + "," + life +  "," + strength + "," + agility + "," + intelligence + "," + currentLife + "%n";
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
         } catch (IOException e) {
@@ -153,7 +155,7 @@ public class PlayerSetup {
     private void setPlayer2() {
         Jeu jeu = new Jeu();
         Player players = new Player();
-        Path playerSetupPath = Paths.get("PlayerSetup.csv");
+        Path playerSetupPath = Paths.get("Player2.csv");
         String playerSetup = "";
         boolean responseIsGood;
         int classe = -1;

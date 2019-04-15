@@ -17,10 +17,9 @@ public class Jeu {
         if (!isGameSetup) { //IF the game is not setup so set it up
             setupGame();
         } else {
-            System.out.println("---------- Succès ! ----------");
+            Player.Player1();
         }
 
-        //SUITE
     }
 
     /**

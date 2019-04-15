@@ -3,18 +3,27 @@ package fr.tf_i.MagiWorld.Player;
 import fr.tf_i.MagiWorld.Classes.Guerrier;
 import fr.tf_i.MagiWorld.Classes.Mage;
 import fr.tf_i.MagiWorld.Classes.Rodeur;
-import fr.tf_i.MagiWorld.Jeu;
+import fr.tf_i.MagiWorld.Data.ReadLastLine;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
     Scanner sc = new Scanner(System.in);
     int currentAction = -1;
 
+
+    
     /**
      * Player 1
      */
-    public void Player1 (){
+    public static void Player1(){
+        Scanner sc = new Scanner(System.in);
+        String csv = "";
+        int currentAction = -1;
+
         int classe = -1;
         int lvl = -1;
         int life = -1;
@@ -22,35 +31,51 @@ public class Player {
         int agility = -1;
         int intelligence = -1;
         int currentLife = -1;
+
         int playerNb = 1;
-        boolean isPlayerInit = false;
 
 
-        if (isPlayerInit == true) {
-            do {
-                do {
-                    System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
-                    currentAction = sc.nextInt();
-                    PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
 
-                } while (currentAction < 1 || currentAction > 2);
-                currentAction = -1;
-            } while (currentLife <= 0);
-            System.out.println("Joueur 1, vous avez perdu !");
-            // ---------------- FIN DU JEU ---------------
-        } else {
-            // ---------------- INIT VARIABLES USING CSV HERE -----------------
-            currentLife = life;
-            isPlayerInit = true;
-            Player1();
+        // ---------------- INIT VARIABLES USING CSV HERE -----------------
+        try {
+            csv = ReadLastLine.Player1CSV();
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la lecture du fichier Player1.csv");
         }
+        String [] split = csv.split(",");
+
+        classe = Integer.valueOf(split[1]);
+        lvl = Integer.valueOf(split[2]);
+        life = Integer.valueOf(split[3]);
+        strength = Integer.valueOf(split[4]);
+        agility = Integer.valueOf(split[5]);
+        intelligence = Integer.valueOf(split[6]);
+        currentLife = Integer.valueOf(split[7]);
+
+        do {
+            do {
+                //SUITE
+                System.out.println("Joueur 1 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                currentAction = sc.nextInt();
+                PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+                //SUITE
+
+            } while (currentAction < 1 || currentAction > 2);
+            currentAction = -1;
+        } while (currentLife <= 0);
+        System.out.println("Joueur 1, vous avez perdu !");
+        // ---------------- FIN DU JEU ---------------
 
     }
 
     /**
      * Player 2
      */
-    public void Player2 (){
+    public static void Player2(){
+        Scanner sc = new Scanner(System.in);
+        String csv = "";
+        int currentAction = -1;
+
         int classe = -1;
         int lvl = -1;
         int life = -1;
@@ -58,28 +83,40 @@ public class Player {
         int agility = -1;
         int intelligence = -1;
         int currentLife = -1;
-        int playerNb = 1;
-        boolean isPlayerInit = false;
+
+        int playerNb = 2;
 
 
-        if (isPlayerInit == true) {
-            do {
-                do {
-                    System.out.println("Joueur 2 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
-                    currentAction = sc.nextInt();
-                    PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
 
-                } while (currentAction < 1 || currentAction > 2);
-                currentAction = -1;
-            } while (currentLife <= 0);
-            System.out.println("Joueur 2, vous avez perdu !");
-            // ---------------- FIN DU JEU ---------------
-        } else {
-            // ---------------- INIT VARIABLES USING CSV HERE --------------
-            currentLife = life;
-            isPlayerInit = true;
-            Player2();
+        // ---------------- INIT VARIABLES USING CSV HERE -----------------
+        try {
+            csv = ReadLastLine.Player2CSV();
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la lecture du fichier Player2.csv");
         }
+        String [] split = csv.split(",");
+
+        classe = Integer.valueOf(split[1]);
+        lvl = Integer.valueOf(split[2]);
+        life = Integer.valueOf(split[3]);
+        strength = Integer.valueOf(split[4]);
+        agility = Integer.valueOf(split[5]);
+        intelligence = Integer.valueOf(split[6]);
+        currentLife = Integer.valueOf(split[7]);
+
+        do {
+            do {
+                //SUITE
+                System.out.println("Joueur 2 (" + currentLife + " de vitalité) veuillez choisir votre action (1: Attaque Basique, 2: Attaque Spéciale)");
+                currentAction = sc.nextInt();
+                PlayerAttack(playerNb,classe,lvl,life,strength,agility,intelligence,currentAction,currentLife);
+                //SUITE
+
+            } while (currentAction < 1 || currentAction > 2);
+            currentAction = -1;
+        } while (currentLife <= 0);
+        System.out.println("Joueur 2, vous avez perdu !");
+        // ---------------- FIN DU JEU ---------------
 
     }
 
@@ -95,7 +132,7 @@ public class Player {
      * @param attCurrentAction Which action player choose
      * @param attCurrentLife The current life of this player
      */
-    public void PlayerAttack (int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
+    public static void PlayerAttack(int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
 
         int[] actionResult;
         int damage = -1;
@@ -104,7 +141,7 @@ public class Player {
         if (attPlayerNb == 1) {
 
             // PLAYER 1 ACTIONS
-            switch (currentAction) {
+            switch (attCurrentAction) {
                 case 1: {
                     switch (attClasse) {
                         case 1:
@@ -151,7 +188,7 @@ public class Player {
 
             // PLAYER 2 ACTIONS
         } else {
-            switch (currentAction) {
+            switch (attCurrentAction) {
                 case 1: {
                     switch (attClasse) {
                         case 1:
