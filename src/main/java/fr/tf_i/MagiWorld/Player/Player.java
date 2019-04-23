@@ -4,7 +4,6 @@ import fr.tf_i.MagiWorld.Classes.Guerrier;
 import fr.tf_i.MagiWorld.Classes.Mage;
 import fr.tf_i.MagiWorld.Classes.Rodeur;
 import fr.tf_i.MagiWorld.Data.ReadLastLine;
-import fr.tf_i.MagiWorld.Jeu;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,9 +17,6 @@ import java.util.Scanner;
 import static java.nio.file.StandardOpenOption.APPEND;
 
 public class Player {
-    Scanner sc = new Scanner(System.in);
-    PrintWriter writer;
-    int currentAction = -1;
 
 
 
@@ -86,9 +82,13 @@ public class Player {
             currentAction = -1;
         } while (currentLife <= 0);
 
-        // ---------------- FIN DU JEU ---------------
+        // ---------------- END OF THE GAME ---------------
 
-        System.out.println("Joueur 1, vous avez perdu !");
+        System.out.println("");
+        System.out.println("JOUEUR 1, VOUS AVEZ PERDU");
+        System.out.println("");
+        System.out.println("=========================");
+
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("Player1.csv");
@@ -105,16 +105,15 @@ public class Player {
         writer.print("");
         writer.close();
         System.exit(0);
-        return;
 
-        // ---------------- FIN DU JEU ---------------
+        // ---------------- END OF THE GAME ---------------
 
     }
 
     /**
      * Player 2
      */
-    public static void Player2(){
+    private static void Player2(){
         Scanner sc = new Scanner(System.in);
         String csv = "";
         int currentAction = -1;
@@ -175,7 +174,10 @@ public class Player {
 
         // ---------------- END OF THE GAME ---------------
 
-        System.out.println("Joueur 2, vous avez perdu !");
+            System.out.println("");
+        System.out.println("JOUEUR 2, VOUS AVEZ PERDU");
+        System.out.println("");
+        System.out.println("=========================");
 
         PrintWriter writer = null;
         try {
@@ -193,7 +195,6 @@ public class Player {
         writer.print("");
         writer.close();
         System.exit(0);
-        return;
 
         // ---------------- END OF THE GAME ---------------
 
@@ -211,7 +212,7 @@ public class Player {
      * @param attCurrentAction Which action player choose
      * @param attCurrentLife The current life of this player
      */
-    public static void PlayerAttack(int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
+    private static void PlayerAttack(int attPlayerNb, int attClasse, int attLvl, int attLife, int attStrength, int attAgility, int attIntelligence, int attCurrentAction, int attCurrentLife) {
 
         Path player1CSVPath = Paths.get("Player1.csv");
         Path player2CSVPath = Paths.get("Player2.csv");
