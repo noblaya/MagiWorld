@@ -31,8 +31,7 @@ public class PlayerSetup {
     /**
      * Setup Player 1
      */
-    public void setPlayer1() {
-        Player players = new Player();
+    private void setPlayer1() {
         Path playerSetupPath = Paths.get("Player1.csv");
         String playerSetup = "";
         boolean responseIsGood;
