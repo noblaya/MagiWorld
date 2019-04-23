@@ -31,5 +31,9 @@ public class Jeu {
        playerSetup.setupPlayers(1);
     }
 
+    public void endGame() {
+        System.out.println("Merci d'avoir joué à MagiWorld !");
+    }
+
 
 }

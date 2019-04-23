@@ -4,6 +4,7 @@ import fr.tf_i.MagiWorld.Classes.Guerrier;
 import fr.tf_i.MagiWorld.Classes.Mage;
 import fr.tf_i.MagiWorld.Classes.Rodeur;
 import fr.tf_i.MagiWorld.Data.ReadLastLine;
+import fr.tf_i.MagiWorld.Jeu;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -103,6 +104,7 @@ public class Player {
         }
         writer.print("");
         writer.close();
+        System.exit(0);
         return;
 
         // ---------------- FIN DU JEU ---------------
@@ -190,6 +192,7 @@ public class Player {
         }
         writer.print("");
         writer.close();
+        System.exit(0);
         return;
 
         // ---------------- END OF THE GAME ---------------
@@ -294,9 +297,10 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer. 295");
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player2();
                             break;
 
                         case 2:
@@ -308,9 +312,10 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer. 309");
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player2();
                             break;
 
                         case 3:
@@ -322,13 +327,15 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer. 323");
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player2();
                             break;
 
                         default:
-                            System.out.println("Erreur lors du choix des joueurs 329");
+                            System.out.println("Erreur lors du choix des joueurs");
+                            Player2();
                             break;
                     }
                 }
@@ -350,7 +357,7 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 351");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
 
@@ -358,10 +365,10 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer. 359");
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
                                 return;
                             }
-
+                            Player2();
                             break;
 
                         case 2:
@@ -374,9 +381,10 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 375");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player2();
                             break;
 
                         case 3:
@@ -389,13 +397,15 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 390");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player2();
                             break;
 
                         default:
-                            System.out.println("Erreur lors du choix des joueurs 396");
+                            System.out.println("Erreur lors du choix des joueurs.");
+                            Player2();
                             break;
                     }
 
@@ -411,7 +421,7 @@ public class Player {
             try {
                 player1Stats = ReadLastLine.Player1CSV();
             } catch (Exception e) {
-                System.out.println("Erreur lors de la lecture du Player1.csv 412");
+                System.out.println("Erreur lors de la lecture du Player1.csv");
             }
             plPlayerNb = 2;
             plClasse = attClasse;
@@ -429,7 +439,7 @@ public class Player {
             try {
                 player2Stats = ReadLastLine.Player2CSV();
             } catch (Exception e) {
-                System.out.println("Erreur lors de la lecture du Player2.csv 430");
+                System.out.println("Erreur lors de la lecture du Player2.csv");
             }
 
             splitPl2 = player2Stats.split(",");
@@ -456,9 +466,10 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 457");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player1();
                             break;
 
                         case 2:
@@ -470,9 +481,10 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 471");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player1();
                             break;
 
                         case 3:
@@ -484,13 +496,15 @@ public class Player {
                             try {
                             Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                         } catch (IOException e) {
-                            System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 485");
+                            System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                             return;
                         }
+                            Player1();
                         break;
 
                         default:
-                            System.out.println("Erreur lors du choix des joueurs 491");
+                            System.out.println("Erreur lors du choix des joueurs.");
+                            Player1();
                             break;
                     }
                 }
@@ -512,7 +526,7 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 513");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
 
@@ -520,9 +534,10 @@ public class Player {
                             try {
                                 Files.write(player1CSVPath, String.format(ennemySetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer. 521");
+                                System.out.println("Une erreur est survenue lors de la génération du Player2.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player1();
                             break;
 
                         case 2:
@@ -535,9 +550,10 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 536");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player1();
                             break;
 
                         case 3:
@@ -550,13 +566,15 @@ public class Player {
                             try {
                                 Files.write(player2CSVPath, String.format(playerSetup).getBytes(), APPEND);
                             } catch (IOException e) {
-                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer. 551");
+                                System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
                                 return;
                             }
+                            Player1();
                             break;
 
                         default:
-                            System.out.println("Erreur lors du choix des joueurs 557");
+                            System.out.println("Erreur lors du choix des joueurs.");
+                            Player1();
                             break;
                     }
 
