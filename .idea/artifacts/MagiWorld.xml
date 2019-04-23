@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MagiWorld">
+    <output-path>$PROJECT_DIR$/out/artifacts/MagiWorld</output-path>
+    <root id="archive" name="MagiWorld.jar">
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Main.java" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Jeu.java" />
+      <element id="directory" name="Classes">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Classes/Guerrier.java" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Classes/Mage.java" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Classes/Rodeur.java" />
+      </element>
+      <element id="directory" name="Data">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Data/ReadLastLine.java" />
+      </element>
+      <element id="directory" name="Player">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Player/Player.java" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/fr/tf_i/MagiWorld/Player/PlayerSetup.java" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/Player1.csv" />
+      <element id="file-copy" path="$PROJECT_DIR$/Player2.csv" />
+      <element id="file-copy" path="$PROJECT_DIR$/pom.xml" />
+      <element id="file-copy" path="$PROJECT_DIR$/MagiWorld.iml" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -2,6 +2,6 @@ MagiWorld :
 
 Projet pour Openclassrooms.
 
-Erreur(s) à fix :
+Laissez bien Player1.csv et Player2.csv à leur place ! (à la racine du dossier).
 
-- Les Joueurs font les 2 attaques (attaque normale + spéciale) au lieu de celle séléctionné uniquement.
+Amusez vous bien =)

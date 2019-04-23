@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: fr.tf_i.MagiWorld
+Main-Class: fr.tf_i.MagiWorld.Main
+

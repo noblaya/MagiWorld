@@ -47,14 +47,14 @@ public class PlayerSetup {
 
         System.out.println("");
         System.out.println("----------------------------------");
-        System.out.println("Création du personnage du Joueur 1");
+        System.out.println("Creation du personnage du Joueur 1");
         System.out.println("----------------------------------");
 
 
         //Set Player's Class :
         do {
             do {
-                System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
+                System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage)");
                 try {
                     classe = sc.nextInt();
                     responseIsGood = true;
@@ -100,7 +100,7 @@ public class PlayerSetup {
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitee");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
@@ -117,7 +117,7 @@ public class PlayerSetup {
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitee");
                     responseIsGood = false;
                 }
             }while (!responseIsGood);
@@ -132,7 +132,7 @@ public class PlayerSetup {
                     intelligence = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e){
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitee");
                     responseIsGood = false;
                 }
 
@@ -144,7 +144,7 @@ public class PlayerSetup {
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la génération du Player1.csv. Merci de rééssayer.");
+            System.out.println("Une erreur est survenue lors de la generation du Player1.csv. Merci de reessayer.");
             return;
         }
 
@@ -172,19 +172,19 @@ public class PlayerSetup {
 
         System.out.println("");
         System.out.println("----------------------------------");
-        System.out.println("Création du personnage du Joueur 2");
+        System.out.println("Creation du personnage du Joueur 2");
         System.out.println("----------------------------------");
 
         //Set Player's Class :
         do {
             do {
-                System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rôdeur, 3 : Mage)");
+                System.out.println("Veuillez choisir la classe du personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage)");
                 try {
                     classe = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 1 et 3 correspondant à la Classe souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 1 et 3 correspondant à la Classe souhaitee");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
@@ -200,7 +200,7 @@ public class PlayerSetup {
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 1 et 100 correspondant au Niveau souhaité");
+                    System.out.println("Merci de saisir un nombre entre 1 et 100 correspondant au Niveau souhaite");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
@@ -224,7 +224,7 @@ public class PlayerSetup {
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + "correspondant à la Force du personnage souhaitee");
                     responseIsGood = false;
                 }
             } while (!responseIsGood);
@@ -241,7 +241,7 @@ public class PlayerSetup {
                     responseIsGood = true;
                 } catch (InputMismatchException e) {
                     sc.next();
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints + " correspondant à l'Agilité du personnage souhaitee");
                     responseIsGood = false;
                 }
             }while (!responseIsGood);
@@ -256,7 +256,7 @@ public class PlayerSetup {
                     intelligence = sc.nextInt();
                     responseIsGood = true;
                 } catch (InputMismatchException e){
-                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitée");
+                    System.out.println("Merci de saisir un nombre entre 0 et " + availablePoints +" correspondant à l'Intelligence du personnage souahaitee");
                     responseIsGood = false;
                 }
 
@@ -268,7 +268,7 @@ public class PlayerSetup {
         try {
             Files.write(playerSetupPath, String.format(playerSetup).getBytes(), APPEND);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la génération du Player2.csv. MErci de rééssayer.");
+            System.out.println("Une erreur est survenue lors de la generation du Player2.csv. Merci de reessayer.");
             return;
         }
 
@@ -292,34 +292,34 @@ public class PlayerSetup {
         if (playerNb == 1) {
             switch (classe) {
                 case 1:
-                    intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
                 case 2:
-                    intro = "Hmmm je suis le Rôdeur Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Hmmm je suis le Rodeur Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
                 case 3:
-                    intro = "Abracadabra je suis le Mage Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Abracadabra je suis le Mage Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
 
                 default:
-                    intro = "Erreur lors du choix de la classe, je suis donc le simple Humain Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Erreur lors du choix de la classe, je suis donc le simple Humain Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
             }
             System.out.println(intro);
             setupPlayers(2);
         } else {
             switch (classe) {
                 case 1:
-                    intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Woarg je suis le Guerrier Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
                 case 2:
-                    intro = "Hmmm je suis le Rôdeur Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Hmmm je suis le Rodeur Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
                 case 3:
-                    intro = "Abracadabra je suis le Mage Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Abracadabra je suis le Mage Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
                     break;
 
                 default:
-                    intro = "Erreur lors du choix de la classe, je suis donc le simple Humain Joueur " + playerNb + " niveau " + lvl + ", je possède " + life + " de vitalité, " + strength + " de force, " + agility + " d'agilité et " + intelligence + " d'intelligence !";
+                    intro = "Erreur lors du choix de la classe, je suis donc le simple Humain Joueur " + playerNb + " niveau " + lvl + ", je possede " + life + " de vitalite, " + strength + " de force, " + agility + " d'agilite et " + intelligence + " d'intelligence !";
             }
             System.out.println(intro);
             jeu.gameLaunch(true);

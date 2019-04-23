@@ -17,7 +17,7 @@ public class Jeu {
         if (!isGameSetup) { //IF the game is not setup so set it up
             setupGame();
         } else {
-            Player.Player1();
+            Player.Player1(); // ELSE Launch the game !
         }
 
     }
@@ -29,10 +29,6 @@ public class Jeu {
        PlayerSetup playerSetup = new PlayerSetup();
 
        playerSetup.setupPlayers(1);
-    }
-
-    public void endGame() {
-        System.out.println("Merci d'avoir joué à MagiWorld !");
     }
 
 
