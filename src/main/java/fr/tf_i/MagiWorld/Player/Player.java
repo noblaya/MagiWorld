@@ -74,9 +74,9 @@ public class Player {
 
                 } while (!responseIsGood);
 
-                //SUITE
+
                 PlayerAttack(playerNb, classe, lvl, life, strength, agility, intelligence, currentAction, currentLife);
-                //SUITE
+
 
             } while (currentAction < 1 || currentAction > 2);
             currentAction = -1;
@@ -89,6 +89,7 @@ public class Player {
         System.out.println("");
         System.out.println("=========================");
 
+        // --- Clear CSV Files ---
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("Player1.csv");
@@ -104,6 +105,8 @@ public class Player {
         }
         writer.print("");
         writer.close();
+        // --- Clear CSV Files ---
+
         System.exit(0);
 
         // ---------------- END OF THE GAME ---------------
@@ -178,6 +181,7 @@ public class Player {
         System.out.println("");
         System.out.println("=========================");
 
+        // --- Clear CSV Files ---
         PrintWriter writer = null;
         try {
             writer = new PrintWriter("Player1.csv");
@@ -193,6 +197,8 @@ public class Player {
         }
         writer.print("");
         writer.close();
+        // --- Clear CSV Files ---
+
         System.exit(0);
 
         // ---------------- END OF THE GAME ---------------
