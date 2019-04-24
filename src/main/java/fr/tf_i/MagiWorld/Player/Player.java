@@ -85,6 +85,7 @@ public class Player {
         // ---------------- END OF THE GAME ---------------
 
         System.out.println("");
+        System.out.println("JOUEUR 1 EST MORT !");
         System.out.println("JOUEUR 1, VOUS AVEZ PERDU");
         System.out.println("");
         System.out.println("=========================");
@@ -177,6 +178,7 @@ public class Player {
         // ---------------- END OF THE GAME ---------------
 
             System.out.println("");
+        System.out.println("JOUEUR 2 EST MORT !");
         System.out.println("JOUEUR 2, VOUS AVEZ PERDU");
         System.out.println("");
         System.out.println("=========================");

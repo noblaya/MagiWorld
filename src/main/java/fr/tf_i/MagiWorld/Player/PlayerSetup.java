@@ -111,7 +111,7 @@ public class PlayerSetup {
         //Set Player's Agility
         do {
             do {
-                System.out.println("Agilité du personnage ? (Entre 0 et " + availablePoints + ")");
+                System.out.println("Agilite du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     agility = sc.nextInt();
                     responseIsGood = true;
@@ -235,7 +235,7 @@ public class PlayerSetup {
         //Set Player's Agility
         do {
             do {
-                System.out.println("Agilité du personnage ? (Entre 0 et " + availablePoints + ")");
+                System.out.println("Agilite du personnage ? (Entre 0 et " + availablePoints + ")");
                 try {
                     agility = sc.nextInt();
                     responseIsGood = true;
